@@ -11,7 +11,7 @@ export default [
       },
       {
         visibility: 'on',
-      },
+    },
       {
         weight: '1.18',
       },
