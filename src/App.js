@@ -1,24 +1,35 @@
-import { CssBaseline, Grid } from "@material-ui/core"
+import React from 'react';
+import { Autocomplete } from '@react-google-maps/api';
+import { AppBar, Toolbar, Typography, InputBase, Box } from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
 
-import Header from './components/Header/Header'
-import List from './components/List/List'
-import Map from './components/Map/Map'
+import useStyles from './styles.js';
 
-const App = () => {
+const Header = ({ onPlaceChanged, onLoad }) => {
+  const classes = useStyles();
+
   return (
-    <>
-      <CssBaseline />
-      <Header />
-      <Grid container spacing={3} style={{ width: '100%' }}>
-        <Grid item xs={12} md={4}>
-          <List />
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <Map />
-        </Grid>
-      </Grid>
-    </>
-  )
-}
+    <AppBar position="static">
+      <Toolbar className={classes.toolbar}>
+        <Typography variant="h5" className={classes.title}>
+          Travl Advz
+        </Typography>
+        <Box display="flex">
+          <Typography variant="h6" className={classes.title}>
+            Explora new placez
+          </Typography>
+          <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase placeholder="Search…" classes={{ root: classes.inputRoot, input: classes.inputInput }} />
+            </div>
+          </Autocomplete>
+        </Box>
+      </Toolbar>
+    </AppBar>
+  );
+};
 
-export default App
+export default Header;
